@@ -3,8 +3,11 @@ const passport = require("passport"),
     googleStrategy = require("passport-google-oauth20").Strategy,
     // adding keys
     keys = require("../config/keys"),
-    // adding User model
-    User = require("../models/userModel");
+    // add ongoose
+    mongoose = require("mongoose"),
+    
+//add user model 
+User = mongoose.model("users");
 
 // Passport config
 passport.use(
