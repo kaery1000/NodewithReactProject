@@ -4,10 +4,10 @@ const passport = require("passport"),
     // adding keys
     keys = require("../config/keys"),
     // add ongoose
-    mongoose = require("mongoose"),
+    mongoose = require("mongoose");
     
 //add user model 
-User = mongoose.model("users");
+const User = mongoose.model("users");
 
 // Passport config
 passport.use(
@@ -19,8 +19,9 @@ passport.use(
         },
         (accessToken, refreshToken, profile, done) => {
             // creating a user model instance and saving to MongoDB
-            console.log(profile);
-            new User ({googleId : profile.id, username : profile.displayName}).save();
+            console.log(profile.id);
+            console.log(profile.displayName);
+            new User({googleId : profile.id, username : profile.displayName}).save();
         }
     )
 );
