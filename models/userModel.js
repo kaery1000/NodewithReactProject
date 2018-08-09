@@ -7,4 +7,4 @@ const userScehma = new mongoose.Schema ({
 });
 
 
-mongoose.model("User", userScehma);
+mongoose.model("users", userScehma);
