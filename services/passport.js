@@ -19,6 +19,7 @@ passport.use(
         },
         (accessToken, refreshToken, profile, done) => {
             // creating a user model instance and saving to MongoDB
+            console.log(profile);
             new User ({googleId : profile.id, username : profile.displayName}).save();
         }
     )
