@@ -10,11 +10,10 @@ const express = require("express"),
 require("./models/userModel");
 // importing passprot
 require("./services/passport");
-        
-        
+
 // MongoDB config
 mongoose.connect(keys.mongoURI, {useNewUrlParser : true});
-        
+
 //import the route and pass the app to the function    
 require("./routes/authRoute")(app);
 
