@@ -7,7 +7,7 @@ const express = require("express"),
         
         
 // importing user model
-require("./models/userModel"),
+require("./models/userModel");
 // importing passprot
 require("./services/passport");
         
