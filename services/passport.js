@@ -9,6 +9,19 @@ const passport = require("passport"),
 //add user model 
 const User = mongoose.model("users");
 
+// serialize 
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+});
+
+// deserialize 
+passport.deserializeUser((id, done) => {
+    User.findById(id)
+    .then(user => {
+        done(null, user);
+    });
+});
+
 // Passport config
 passport.use(
     new googleStrategy(
@@ -18,8 +31,19 @@ passport.use(
             callbackURL : "/auth/google/callback"
         },
         (accessToken, refreshToken, profile, done) => {
-            // creating a user model instance and saving to MongoDB
-            new User({googleId : "102910883643915130936", username : "Karan Mehta"}).save();
+            User.findOne({googleId: profile.id}).then(existingUser => {
+                if(existingUser) {
+                    //already record exists
+                    //call done and pass args that error is null
+                    done(null, existingUser);
+                } else {
+                    // creating a user model instance and saving to MongoDB
+                    new User({googleId : profile.id, username : profile.displayName})
+                    .save()
+                    .then(user => done(null, user));
+                    
+                }
+            });
         }
     )
 );
